@@ -46,20 +46,24 @@ public class InputActivity extends AppCompatActivity {
         });
     }
 
+    //getting regex from main activity
     private void gettingRegexValue() {
         Bundle bundle = getIntent().getExtras();
         reg = bundle.getString(Constants.REGEX);
     }
 
+    //sending back the input result
     public void send(View view) {
         String input = b.data.getEditText().getText().toString().trim();
 
+        //if invalid
         if(input.isEmpty() || !input.matches(reg)){
             b.data.setError("Enter valid data");
             return;
         }
         b.data.setError(null);
 
+        //if valid
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra(Constants.INPUT_DATA,input);
         setResult(RESULT_OK,intent);
